@@ -14,6 +14,7 @@ private:
    void SetPremierClient(ClientEnAttente* p);
    ClientEnAttente* GetPremier() const;
 
+  
    void SetNbClient(int nb);
    bool FileVide() const;
 
@@ -21,7 +22,7 @@ public:
    FileAttente();
    
    int GetNbClient() const;
-
+   string GetClient(int indice);
    void AjouterClient(string nom,int nbPersonnes);
    ClientEnAttente RetirerClient();
 

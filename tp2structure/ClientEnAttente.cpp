@@ -6,6 +6,10 @@ ClientEnAttente::Client::Client()
    nom = "";
    nbPersonnes = 0;
 
+   sectionVoulu.interieur = false;
+   sectionVoulu.teraceF = false;
+   sectionVoulu.teraceNf = false;
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 

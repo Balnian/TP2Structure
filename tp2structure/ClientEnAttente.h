@@ -9,8 +9,19 @@ class ClientEnAttente
 private:
    struct Client
    {
+      struct Section
+      {
+         bool teraceF;
+         bool teraceNf;
+         bool interieur;
+
+
+      };
+
       string nom;
       int nbPersonnes;
+      Section sectionVoulu;
+
       Client();
    };
 

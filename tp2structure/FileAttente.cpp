@@ -1,5 +1,5 @@
 #include "FileAttente.h"
-
+#include <sstream>
 FileAttente::FileAttente()
 {
    SetDernierClient(nullptr);
@@ -112,6 +112,36 @@ void FileAttente::AfficherFile(ostream& sortie) const
    sortie << GetNbClient() << endl;
 
 }
+////////////////////////////////////////////////////////////////////
+string FileAttente::GetClient(int indice)
+{
+   ClientEnAttente * client;
+   string leClient;
+   string temp;
+   stringstream ss;
+   int i = 0;
+
+   if (GetPremier()!= nullptr)
+   client = GetPremier();
+
+   while (i < indice)
+   {
+      client = client->GetSuivant();
+   }
+
+   leClient = client->GetClient().nom + " ";
+
+   ss << client->GetClient().nbPersonnes;
+   leClient = ss.str();
+
+  leClient = leClient + temp;
+
+  return leClient;
+
+
+
+}
+/////////////////////////////////////////////////////////////////////////
 FileAttente::~FileAttente()
 {
    
