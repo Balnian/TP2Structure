@@ -8,8 +8,16 @@ int main()
   
    while (true)
    {
-	   Menu(file);
+	   try
+	   {
+       Menu(file);
 	   Wait();
+	   }
+	   catch (exception e)
+	   {
+		   e.what();
+	   }
+	   
    }
      
    

@@ -6,6 +6,7 @@ using namespace std;
 void Menu(FileAttente& lafile)
 {
    int choix;
+
    do
    {
    system("cls");
@@ -17,27 +18,30 @@ void Menu(FileAttente& lafile)
    cout << "6. Quitter le programme" << endl <<endl;
    cout << "Faite un choix: ";
    cin >> choix;
+ 
    } while (choix < 1 || choix > 6);
   
-
+ 
    GestionMenu(choix,lafile);
 
 }
+
 void GestionMenu(int choix,FileAttente& lafile)
 {
+	
    switch (choix)
    {
    case 1: DemanderInfo(lafile);
       break;
-   case 2: 
+   case 2: cout << "yolo 2!";
       break;
-   case 3:
+   case 3:  DemanderInfoClientQuitte(lafile);
       break;
-   case 4:
+   case 4: AfficherClient(lafile);
       break;
    case 5: lafile.AfficherFile(cout);
       break;
-   case 6:
+   case 6:cout << "yolo 6!";
       break;
 
    default:
@@ -72,12 +76,42 @@ void AssignerTable(FileAttente& lafile)
 
    }
 
+}
+void AfficherClient(FileAttente& lafile)
+{
 
+	int indice;
 
+	cout << "Quelle clients voulez vous connaitre l'identiter? : ";
+	cin >> indice;
 
+	cout << "le client" << " " << indice << " " << "est " << lafile.GetClient(indice);
+	
 
 }
+void DemanderInfoClientQuitte(FileAttente& lafile)
+{
 
+	string nom;
+	int nbPersonnes;
+
+	cout << "Nom du client qui quitte ? : ";
+	cin >> nom;
+	cout << endl;
+	cout << "Combien de personne ?: ";
+	cin >> nbPersonnes;
+
+
+	if (lafile.RetirerClient(nom, nbPersonnes))
+	{
+		cout << nom << " " << "a ete retirer avec succes de la file" << endl;
+	}
+	else
+	{
+		cout << "Erreur " << nom << " " << "est introuvable" << endl;
+	}
+
+}
 void Wait()
 {
 	cout << endl << "Any key to continue..." << endl;

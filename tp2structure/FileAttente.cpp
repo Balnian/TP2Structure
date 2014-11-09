@@ -119,7 +119,7 @@ string FileAttente::GetClient(int indice)
    string leClient;
    string temp;
    stringstream ss;
-   int i = 0;
+   int i = 1;
 
    if (GetPremier()!= nullptr)
    client = GetPremier();
@@ -127,14 +127,15 @@ string FileAttente::GetClient(int indice)
    while (i < indice)
    {
       client = client->GetSuivant();
+	  i++; 
    }
 
    leClient = client->GetClient().nom + " ";
 
-   ss << client->GetClient().nbPersonnes;
+   /*ss << client->GetClient().nbPersonnes;
    leClient = ss.str();
 
-  leClient = leClient + temp;
+  leClient = leClient + temp;*/
 
   return leClient;
 
@@ -145,6 +146,7 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 {
 
 	ClientEnAttente* clientAretirer = GetPremier();
+	ClientEnAttente* temp;
 	bool trouver = false;
 
 	if (clientAretirer == nullptr)
@@ -156,10 +158,11 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 	{
 		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom) && clientAretirer->GetClient().nbPersonnes == nbpersonnes)
 		{
-			trouver = true;
-			clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
+		/*	trouver = true;
+			temp = clientAretirer->GetPrecedent();
+			temp->SetSuivant(clientAretirer->GetSuivant());
 			clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
-			delete clientAretirer;
+			delete clientAretirer;*/
 			SetNbClient(GetNbClient() - 1);
 			
 		}
