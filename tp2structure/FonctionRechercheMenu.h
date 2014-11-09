@@ -6,3 +6,4 @@ void Menu(FileAttente &lafile);
 void GestionMenu(int choix, FileAttente & lafile);
 void DemanderInfo(FileAttente &lafile);
 void AssignerTable(FileAttente& lafile);
+void Wait();

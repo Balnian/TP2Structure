@@ -6,10 +6,13 @@ int main()
 {
    FileAttente file;
   
-   for (size_t i = 0; i < 2; i++)
+   while (true)
    {
-     Menu(file);
+	   Menu(file);
+	   Wait();
    }
+     
+   
     
    
  

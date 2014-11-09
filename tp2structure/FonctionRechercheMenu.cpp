@@ -63,14 +63,24 @@ void DemanderInfo(FileAttente &lafile)
 void AssignerTable(FileAttente& lafile)
 {
 
-   bool Trouver = false;
+   bool trouver = false;
+   int i = 0;
 
-   while (lafile.)
+   while (i != lafile.GetNbClient() && !trouver)
+   {
+	 
+
+   }
 
 
 
 
 
+}
 
-
+void Wait()
+{
+	cout << endl << "Any key to continue..." << endl;
+	cin.ignore(cin.rdbuf()->in_avail() + 1);
+	system("cls");
 }

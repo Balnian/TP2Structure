@@ -13,7 +13,8 @@ private:
 
    void SetPremierClient(ClientEnAttente* p);
    ClientEnAttente* GetPremier() const;
-
+   string MettreEnMajuscules(string nom) const;
+   
   
    void SetNbClient(int nb);
    bool FileVide() const;
@@ -24,7 +25,8 @@ public:
    int GetNbClient() const;
    string GetClient(int indice);
    void AjouterClient(string nom,int nbPersonnes);
-   ClientEnAttente RetirerClient();
+   ClientEnAttente RetirerClient(int nbpersonnes);
+   bool RetirerClient(string nom, int nbpersonnes);
 
    void AfficherFile(ostream& sortie) const;
    ~FileAttente();

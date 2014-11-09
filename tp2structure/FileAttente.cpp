@@ -70,7 +70,7 @@ void  FileAttente::AjouterClient(string nom,int nbPersonnes)
    SetNbClient(GetNbClient() + 1);
 
 }
-ClientEnAttente  FileAttente::RetirerClient()
+ClientEnAttente  FileAttente::RetirerClient(int nbpersonne)
 {
    ClientEnAttente* clientAretirer = GetPremier();
    ClientEnAttente clientRetirer;
@@ -140,6 +140,46 @@ string FileAttente::GetClient(int indice)
 
 
 
+}
+bool FileAttente::RetirerClient(string nom, int nbpersonnes)
+{
+
+	ClientEnAttente* clientAretirer = GetPremier();
+	bool trouver = false;
+
+	if (clientAretirer == nullptr)
+		throw exception("Liste Vide.....!!!!...");
+
+
+	
+	while (clientAretirer!=nullptr || !trouver)
+	{
+		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom) && clientAretirer->GetClient().nbPersonnes == nbpersonnes)
+		{
+			trouver = true;
+			clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
+			clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
+			delete clientAretirer;
+			SetNbClient(GetNbClient() - 1);
+			
+		}
+		else
+		{
+			clientAretirer = clientAretirer->GetSuivant();
+		}
+	}
+
+
+	return trouver;
+}
+////////////////////////////////////////////////////////////////////////////////
+string FileAttente::MettreEnMajuscules(string nom) const
+{
+	for (int i = 0; i < nom.size(); ++i)
+	{
+		nom[i] = toupper(nom[i]);
+	}
+	return nom;
 }
 /////////////////////////////////////////////////////////////////////////
 FileAttente::~FileAttente()
