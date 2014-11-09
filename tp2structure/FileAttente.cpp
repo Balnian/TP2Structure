@@ -1,5 +1,8 @@
 #include "FileAttente.h"
 #include <sstream>
+#include <iostream>
+using namespace std;
+
 FileAttente::FileAttente()
 {
    SetDernierClient(nullptr);
@@ -9,8 +12,7 @@ FileAttente::FileAttente()
 }
 void FileAttente::SetDernierClient(ClientEnAttente* p)
 {
-
-  
+	
    pDernnierClient_ = p;
 }
 ClientEnAttente* FileAttente::GetDernier() const
@@ -101,7 +103,9 @@ void FileAttente::AfficherFile(ostream& sortie) const
 {
 
    ClientEnAttente* lecture = GetPremier();
+   if (lecture == nullptr)
 
+	   throw exception("liste vide...");
 
    while (lecture != nullptr)
    {
@@ -121,8 +125,11 @@ string FileAttente::GetClient(int indice)
    stringstream ss;
    int i = 1;
 
-   if (GetPremier()!= nullptr)
    client = GetPremier();
+
+   if (client == nullptr)
+	   throw exception("liste vide...");
+
 
    while (i < indice)
    {
@@ -132,7 +139,7 @@ string FileAttente::GetClient(int indice)
 
    leClient = client->GetClient().nom + " ";
 
-   /*ss << client->GetClient().nbPersonnes;
+   /*ss << client->GetClient().nbPersonnes;w
    leClient = ss.str();
 
   leClient = leClient + temp;*/
@@ -147,6 +154,7 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 
 	ClientEnAttente* clientAretirer = GetPremier();
 	ClientEnAttente* temp;
+
 	bool trouver = false;
 
 	if (clientAretirer == nullptr)
@@ -154,21 +162,24 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 
 
 	
-	while (clientAretirer!=nullptr || !trouver)
+	while (clientAretirer!=nullptr && !trouver )
 	{
 		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom) && clientAretirer->GetClient().nbPersonnes == nbpersonnes)
 		{
-		/*	trouver = true;
-			temp = clientAretirer->GetPrecedent();
+		
+			cout << "trouver";
+			trouver = true;
+		/*	temp = clientAretirer->GetPrecedent();
 			temp->SetSuivant(clientAretirer->GetSuivant());
 			clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
-			delete clientAretirer;*/
-			SetNbClient(GetNbClient() - 1);
+			delete clientAretirer;
+			SetNbClient(GetNbClient() - 1);		*/
 			
 		}
 		else
 		{
 			clientAretirer = clientAretirer->GetSuivant();
+			
 		}
 	}
 

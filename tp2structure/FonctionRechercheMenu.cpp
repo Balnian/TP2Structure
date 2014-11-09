@@ -5,7 +5,8 @@ using namespace std;
 
 void Menu(FileAttente& lafile)
 {
-   int choix;
+	int choix;
+
 
    do
    {

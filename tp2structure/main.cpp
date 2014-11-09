@@ -6,18 +6,21 @@ int main()
 {
    FileAttente file;
   
-   while (true)
-   {
+    while (true)
+     {
+		Wait();
+
 	   try
 	   {
-       Menu(file);
-	   Wait();
+		   Menu(file);
+		 
 	   }
 	   catch (exception e)
 	   {
-		   e.what();
+		   cout << e.what();
 	   }
-	   
+
+     }
    }
      
    
@@ -34,4 +37,3 @@ int main()
 
 
 
-}
