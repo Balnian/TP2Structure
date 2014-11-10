@@ -9,5 +9,15 @@ struct Section
    {
       *this = sect;
    }*/
+
+   bool operator == (Section sect)
+   {
+	   bool estEgale=false;
+	   estEgale |= this->teraceF == sect.teraceF;
+	   estEgale |= this->teraceNf == sect.teraceNf;
+	   estEgale |= this->interieur == sect.interieur;
+	   return estEgale;
+
+   }
    
 };
