@@ -60,14 +60,27 @@ void DemanderInfo(FileAttente &lafile)
 {
    string nom;
    int nbPersonnes;
-
+   Section section;
+   ClientEnAttente clientTempo;
    cout << "Nom du client: ";
    cin >> nom;
    cout << endl;
    cout << "Pour combien de personnes: ";
    cin >> nbPersonnes;
+   cout << "Dans quelles sections? (1=Oui, 0=Non)" << endl;
+   cout << "Terrasse Fumeur: ";
+   cin >> section.teraceF;
+   cout <<endl<< "Terrasse Non Fumeur: ";
+   cin >> section.teraceNf;
+   cout << endl << "Interieur: ";
+   cin >> section.interieur;
+
   
-   lafile.AjouterClient(nom, nbPersonnes);
+   clientTempo.SetNom(nom);
+   clientTempo.SetNbPersonnes(nbPersonnes);
+   clientTempo.SetSection(section);
+
+   lafile.AjouterClient(clientTempo);
 
 }
 void AssignerTable(FileAttente& lafile)

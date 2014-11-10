@@ -4,6 +4,10 @@
 GestionTable::~GestionTable()
 {
 }
+ClientEnAttente * GestionTable::getMeilleurMatch()
+{
+	return pMeilleurMatch;
+}
 
 bool GestionTable::operator == (ClientEnAttente * client)
 {
@@ -13,9 +17,9 @@ bool GestionTable::operator == (ClientEnAttente * client)
 		{
 			this->pMeilleurMatch = client;
 			if (this->nbPlaces_ == client->GetClient().nbPersonnes)
-				return false;
+				return true;
 		}
 	}
-	return true;
+	return false;
 		
 }

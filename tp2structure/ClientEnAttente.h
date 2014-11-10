@@ -24,11 +24,13 @@ private:
 public:
    ClientEnAttente();
    ClientEnAttente(string nom,int nbPersonnes);
-   void SetClient(Client c);
    void SetSuivant(ClientEnAttente* p);
    void Setprecedent(ClientEnAttente* p);
    ClientEnAttente* GetSuivant();
    ClientEnAttente* GetPrecedent();
    Client GetClient();
+   void SetNom(string nom);
+   void SetNbPersonnes(int nbPersonnes);
+   void SetSection(Section sectionVoulu);
   
 };

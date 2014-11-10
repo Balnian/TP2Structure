@@ -1,5 +1,6 @@
 #pragma once
 #include "ClientEnAttente.h"
+#include "GestionTable.h"
 
 class FileAttente
 {
@@ -24,7 +25,7 @@ public:
    
    int GetNbClient() const;
    string GetClient(int indice);
-   void AjouterClient(string nom,int nbPersonnes);
+   void AjouterClient(ClientEnAttente client);
    ClientEnAttente RetirerClient(int nbpersonnes,Section laSection);
    bool RetirerClient(string nom, int nbpersonnes);
 

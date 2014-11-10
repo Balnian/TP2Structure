@@ -52,10 +52,18 @@ ClientEnAttente::Client ClientEnAttente::GetClient()
 {
    return client_;
 }
-void ClientEnAttente::SetClient(Client c)
+
+
+void ClientEnAttente::SetNom(string nom)
 {
-    client_.nom = c.nom;
-    client_.nbPersonnes = c.nbPersonnes;
-   
+	client_.nom = nom;
+}
+void ClientEnAttente::SetNbPersonnes(int nbPersonnes)
+{
+	client_.nbPersonnes = nbPersonnes;
+}
+void ClientEnAttente::SetSection(Section sectionVoulu)
+{
+	client_.sectionVoulu = sectionVoulu;
 }
 

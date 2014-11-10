@@ -53,9 +53,10 @@ int  FileAttente::GetNbClient() const
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-void  FileAttente::AjouterClient(string nom,int nbPersonnes)
+void  FileAttente::AjouterClient(ClientEnAttente client)
 {
-   ClientEnAttente* pclientTampo = new ClientEnAttente(nom, nbPersonnes);
+   ClientEnAttente* pclientTampo = new ClientEnAttente();
+   *pclientTampo = client;
    if (FileVide())
    {
       SetPremierClient(pclientTampo);
@@ -76,26 +77,24 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
 {
    ClientEnAttente* clientAretirer = GetPremier();
    ClientEnAttente clientRetirer;
-
+   GestionTable latable(laSection, nbpersonne);
    if (clientAretirer == nullptr)
       throw exception("Liste Vide.....!!!!...");
 
-   while (clientAretirer != nullptr)
+   while (clientAretirer != nullptr && !(latable == clientAretirer))
    {
-      if (clientAretirer->GetClient().nbPersonnes == nbpersonne
-         && clientAretirer->GetClient().sectionVoulu == laSection)
-      {
-      }
-      else
-      {
-        
-      }
+      
+		  clientAretirer = clientAretirer->GetSuivant();
+      
 
    }
-  
+   if (latable.getMeilleurMatch() != nullptr)
+	   RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
+   else
+	   throw exception("Personne ne veux/peux etre sur cette table....Bruler la!!!!!");
    
 
-   return clientRetirer;
+   return clientRetirer; 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::AfficherFile(ostream& sortie) const
@@ -139,11 +138,15 @@ string FileAttente::GetClient(int indice)
 
    leClient = client->GetClient().nom + " ";
 
-   /*ss << client->GetClient().nbPersonnes;w
-   leClient = ss.str();
-
-  leClient = leClient + temp;*/
-
+   ss << client->GetClient().nbPersonnes;
+   leClient += "pour " + ss.str() + ((client->GetClient().nbPersonnes > 1) ? " personnes" : " personne");
+   leClient += " dans la section "; 
+   leClient += ((client->GetClient().sectionVoulu.interieur) ? "salle a manger" : "");
+   leClient += ((client->GetClient().sectionVoulu.interieur && client->GetClient().sectionVoulu.teraceF) ? ", " : "");
+   leClient += ((client->GetClient().sectionVoulu.teraceF) ? "terrasse fumeur" : "");
+   leClient += ((client->GetClient().sectionVoulu.teraceF && client->GetClient().sectionVoulu.teraceNf) ? ", " : "");
+   leClient += ((client->GetClient().sectionVoulu.teraceNf) ? "terrasse non fumeur" : "");
+   leClient += ".";
   return leClient;
 
 

@@ -8,8 +8,10 @@ class GestionTable
    Section laSection_;
    ClientEnAttente * pMeilleurMatch;
 public:
-   GestionTable(Section laSection, int nbPlaces):laSection_(laSection),nbPlaces_(nbPlaces);
+	GestionTable(Section laSection, int nbPlaces) :laSection_(laSection), nbPlaces_(nbPlaces){}
    ~GestionTable();
+   ClientEnAttente * getMeilleurMatch();
    bool operator == (ClientEnAttente * client);
+
 
 };
