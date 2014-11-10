@@ -25,7 +25,7 @@ public:
    int GetNbClient() const;
    string GetClient(int indice);
    void AjouterClient(string nom,int nbPersonnes);
-   ClientEnAttente RetirerClient(int nbpersonnes);
+   ClientEnAttente RetirerClient(int nbpersonnes,Section laSection);
    bool RetirerClient(string nom, int nbpersonnes);
 
    void AfficherFile(ostream& sortie) const;

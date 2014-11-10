@@ -79,12 +79,16 @@
     <ClInclude Include="ClientEnAttente.h" />
     <ClInclude Include="FileAttente.h" />
     <ClInclude Include="FonctionRechercheMenu.h" />
+    <ClInclude Include="GestionTable.h" />
+    <ClInclude Include="Section.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientEnAttente.cpp" />
     <ClCompile Include="FileAttente.cpp" />
     <ClCompile Include="FonctionRechercheMenu.cpp" />
+    <ClCompile Include="GestionTable.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Section.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,4 +8,6 @@ void DemanderInfo(FileAttente &lafile);
 void AssignerTable(FileAttente& lafile);
 void DemanderInfoClientQuitte(FileAttente& lafile);
 void AfficherClient(FileAttente& lafile);
+void InfoTable(FileAttente &lafile);
+void GestionAttribution(FileAttente & lafile,int nbpersonnes, int choix);
 void Wait();

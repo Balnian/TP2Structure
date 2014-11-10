@@ -10,6 +10,7 @@ void Menu(FileAttente& lafile)
 
    do
    {
+
    system("cls");
    cout << "1. Ajouter un Client"<<endl;
    cout << "2. Assigner une table" << endl;
@@ -32,20 +33,24 @@ void GestionMenu(int choix,FileAttente& lafile)
 	
    switch (choix)
    {
-   case 1: DemanderInfo(lafile);
+   case 1: 
+      DemanderInfo(lafile);
       break;
-   case 2: cout << "yolo 2!";
+   case 2:
+      cout << "yolo 2!";
       break;
-   case 3:  DemanderInfoClientQuitte(lafile);
+   case 3:  
+      DemanderInfoClientQuitte(lafile);
       break;
-   case 4: AfficherClient(lafile);
+   case 4: 
+      AfficherClient(lafile);
       break;
-   case 5: lafile.AfficherFile(cout);
+   case 5:
+      lafile.AfficherFile(cout);
       break;
-   case 6:cout << "yolo 6!";
-      break;
-
+  
    default:
+      cout << "exit";
       break;
    }
 
@@ -111,6 +116,44 @@ void DemanderInfoClientQuitte(FileAttente& lafile)
 	{
 		cout << "Erreur " << nom << " " << "est introuvable" << endl;
 	}
+
+}
+void InfoTable(FileAttente &lafile)
+{
+   int nbPersonne;
+   int section;
+  
+   cout << "La table disponible est pour combien de personnes?: ";
+   cin >> nbPersonne;
+
+   cout << "La table ce trouve dans quelle section? : "<<endl;
+   cout << "1.Terrace non Fumeur" << endl;
+   cout << "2.Terrace fumeur" << endl;
+   cout << "3. Salle a Manger" << endl;
+   cout << ": ";
+   cin >> section;
+
+   GestionAttribution(lafile,nbPersonne, section);
+
+}
+void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
+{
+
+   Section laSection;
+   switch (choix)
+   {
+   case 1:
+      laSection.teraceNf = true;
+      break;
+   case 2:
+      laSection.teraceF = true;
+      break;
+   default:
+      laSection.interieur = true;
+      break;
+   }
+
+
 
 }
 void Wait()
