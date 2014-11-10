@@ -4,6 +4,8 @@
 
 int main()
 {
+
+
    FileAttente file;
   
     while (true)

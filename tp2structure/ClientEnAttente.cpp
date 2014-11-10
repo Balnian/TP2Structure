@@ -6,17 +6,15 @@ ClientEnAttente::Client::Client()
    nom = "";
    nbPersonnes = 0;
 
-   sectionVoulu.interieur = false;
-   sectionVoulu.teraceF = false;
-   sectionVoulu.teraceNf = false;
+  
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ClientEnAttente::ClientEnAttente()
 {
-   SetSuivant(0);
-   Setprecedent(0);
+   SetSuivant(nullptr);
+   Setprecedent(nullptr);
    
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +36,6 @@ void ClientEnAttente::SetSuivant(ClientEnAttente* p)
 }
 void ClientEnAttente::Setprecedent(ClientEnAttente* p)
 {
-  
       pPrecedent_ = p;
 }
 ClientEnAttente* ClientEnAttente::GetSuivant()

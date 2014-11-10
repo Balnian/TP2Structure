@@ -24,6 +24,12 @@
     <ClInclude Include="FonctionRechercheMenu.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
+    <ClInclude Include="Section.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GestionTable.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientEnAttente.cpp">
@@ -36,6 +42,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="FonctionRechercheMenu.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Section.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GestionTable.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
