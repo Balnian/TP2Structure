@@ -1,6 +1,9 @@
 #include "GestionTable.h"
 
-
+GestionTable::GestionTable(Section laSection, int nbPlaces) :laSection_(laSection), nbPlaces_(nbPlaces)
+{
+	pMeilleurMatch = nullptr;
+}
 GestionTable::~GestionTable()
 {
 }
@@ -11,14 +14,21 @@ ClientEnAttente * GestionTable::getMeilleurMatch()
 
 bool GestionTable::operator == (ClientEnAttente * client)
 {
+	if (client!=nullptr)
 	if (client->GetClient().nbPersonnes <= nbPlaces_ && client->GetClient().sectionVoulu == laSection_)
 	{
-		if (this->nbPlaces_ - client->GetClient().nbPersonnes < this->nbPlaces_ - this->pMeilleurMatch->GetClient().nbPersonnes)
+		if (pMeilleurMatch != nullptr)
 		{
-			this->pMeilleurMatch = client;
-			if (this->nbPlaces_ == client->GetClient().nbPersonnes)
-				return true;
+			if ((nbPlaces_ - client->GetClient().nbPersonnes) < nbPlaces_ - pMeilleurMatch->GetClient().nbPersonnes)
+			{
+				pMeilleurMatch = client;
+				if (nbPlaces_ == client->GetClient().nbPersonnes)
+					return true;
+			}
 		}
+		else
+			pMeilleurMatch = client;
+
 	}
 	return false;
 		

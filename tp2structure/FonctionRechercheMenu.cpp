@@ -37,7 +37,7 @@ void GestionMenu(int choix,FileAttente& lafile)
       DemanderInfo(lafile);
       break;
    case 2:
-      cout << "yolo 2!";
+	   InfoTable(lafile);
       break;
    case 3:  
       DemanderInfoClientQuitte(lafile);
@@ -166,7 +166,7 @@ void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
       break;
    }
 
-
+   lafile.RetirerClient(nbpersonne,laSection);
 
 }
 void Wait()
