@@ -4,9 +4,7 @@ GestionTable::GestionTable(Section laSection, int nbPlaces) :laSection_(laSectio
 {
 	pMeilleurMatch = nullptr;
 }
-GestionTable::~GestionTable()
-{
-}
+
 ClientEnAttente * GestionTable::getMeilleurMatch()
 {
 	return pMeilleurMatch;

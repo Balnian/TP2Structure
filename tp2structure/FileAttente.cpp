@@ -57,6 +57,7 @@ void  FileAttente::AjouterClient(ClientEnAttente client)
 {
    ClientEnAttente* pclientTampo = new ClientEnAttente();
    *pclientTampo = client;
+
    if (FileVide())
    {
       SetPremierClient(pclientTampo);
@@ -77,19 +78,20 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
 {
    ClientEnAttente* clientAretirer = GetPremier();
    ClientEnAttente clientRetirer;
+
    GestionTable latable(laSection, nbpersonne);
    if (clientAretirer == nullptr)
       throw exception("Liste Vide.....!!!!...");
 
    while (clientAretirer != nullptr && !(latable == clientAretirer))
-   {
-      
+   {     
 		  clientAretirer = clientAretirer->GetSuivant();
-      
-
    }
    if (latable.getMeilleurMatch() != nullptr)
-	   RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
+   {
+      clientRetirer = *latable.getMeilleurMatch();
+      RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
+   }
    else
 	   throw exception("Personne ne veux/peux etre sur cette table....Bruler la!!!!!");
    

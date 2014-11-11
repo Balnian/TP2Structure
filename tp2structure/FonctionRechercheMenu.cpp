@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-void Menu(FileAttente& lafile)
+bool Menu(FileAttente& lafile)
 {
 	int choix;
 
@@ -24,36 +24,45 @@ void Menu(FileAttente& lafile)
    } while (choix < 1 || choix > 6);
   
  
-   GestionMenu(choix,lafile);
+  return GestionMenu(choix,lafile);
 
 }
 
-void GestionMenu(int choix,FileAttente& lafile)
+bool GestionMenu(int choix,FileAttente& lafile)
 {
 	
    switch (choix)
    {
    case 1: 
+  
       DemanderInfo(lafile);
+
       break;
    case 2:
+    
 	   InfoTable(lafile);
       break;
    case 3:  
+    
       DemanderInfoClientQuitte(lafile);
       break;
    case 4: 
+    
       AfficherClient(lafile);
       break;
    case 5:
+     
       lafile.AfficherFile(cout);
       break;
   
    default:
-      cout << "exit";
+      cout << "Bonne Journee" << endl;
+      return true;
       break;
    }
 
+   Wait();
+   return false;
 }
 
 void DemanderInfo(FileAttente &lafile)
@@ -62,11 +71,15 @@ void DemanderInfo(FileAttente &lafile)
    int nbPersonnes;
    Section section;
    ClientEnAttente clientTempo;
+
    cout << "Nom du client: ";
    cin >> nom;
-   cout << endl;
    cout << "Pour combien de personnes: ";
    cin >> nbPersonnes;
+
+ 
+  
+   system("cls");
    cout << "Dans quelles sections? (1=Oui, 0=Non)" << endl;
    cout << "Terrasse Fumeur: ";
    cin >> section.teraceF;
@@ -75,7 +88,6 @@ void DemanderInfo(FileAttente &lafile)
    cout << endl << "Interieur: ";
    cin >> section.interieur;
 
-  
    clientTempo.SetNom(nom);
    clientTempo.SetNbPersonnes(nbPersonnes);
    clientTempo.SetSection(section);
@@ -83,19 +95,7 @@ void DemanderInfo(FileAttente &lafile)
    lafile.AjouterClient(clientTempo);
 
 }
-void AssignerTable(FileAttente& lafile)
-{
 
-   bool trouver = false;
-   int i = 0;
-
-   while (i != lafile.GetNbClient() && !trouver)
-   {
-	 
-
-   }
-
-}
 void AfficherClient(FileAttente& lafile)
 {
 
@@ -103,7 +103,6 @@ void AfficherClient(FileAttente& lafile)
 
 	cout << "Quelle clients voulez vous connaitre l'identiter? : ";
 	cin >> indice;
-
 	cout << "le client" << " " << indice << " " << "est " << lafile.GetClient(indice);
 	
 
@@ -116,26 +115,26 @@ void DemanderInfoClientQuitte(FileAttente& lafile)
 
 	cout << "Nom du client qui quitte ? : ";
 	cin >> nom;
-	cout << endl;
 	cout << "Combien de personne ?: ";
 	cin >> nbPersonnes;
 
 
-	if (lafile.RetirerClient(nom, nbPersonnes))
-	{
-		cout << nom << " " << "a ete retirer avec succes de la file" << endl;
-	}
-	else
-	{
-		cout << "Erreur " << nom << " " << "est introuvable" << endl;
-	}
-
+   if (lafile.RetirerClient(nom, nbPersonnes))
+   {
+      cout << nom << " " << "a ete retirer avec succes de la file" << endl;
+   }
+   else
+      throw exception("Client introuvable impossible de retirer");
 }
 void InfoTable(FileAttente &lafile)
 {
    int nbPersonne;
    int section;
-  
+   
+   do
+   {
+
+   system("cls");
    cout << "La table disponible est pour combien de personnes?: ";
    cin >> nbPersonne;
 
@@ -146,6 +145,8 @@ void InfoTable(FileAttente &lafile)
    cout << ": ";
    cin >> section;
 
+   } while (section < 1 || section > 3);
+
    GestionAttribution(lafile,nbPersonne, section);
 
 }
@@ -153,6 +154,7 @@ void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
 {
 
    Section laSection;
+   ClientEnAttente leclient;
    switch (choix)
    {
    case 1:
@@ -166,7 +168,9 @@ void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
       break;
    }
 
-   lafile.RetirerClient(nbpersonne,laSection);
+  leclient = lafile.RetirerClient(nbpersonne,laSection);
+
+  cout << "la table a ete attribuer a " << leclient.GetClient().nom << " pour "<<leclient.GetClient().nbPersonnes;
 
 }
 void Wait()

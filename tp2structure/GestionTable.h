@@ -9,7 +9,6 @@ class GestionTable
    ClientEnAttente * pMeilleurMatch;
 public:
 	GestionTable(Section laSection, int nbPlaces);
-   ~GestionTable();
    ClientEnAttente * getMeilleurMatch();
    bool operator == (ClientEnAttente * client);
 

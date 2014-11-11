@@ -7,24 +7,28 @@ int main()
 
 
    FileAttente file;
+   bool finProgramme = false;
   
-    while (true)
-     {
-		Wait();
 
-	   try
-	   {
-		   Menu(file);
-		 
-	   }
-	   catch (exception e)
-	   {
-		   cout << e.what();
-	   }
+      while (!finProgramme)
+      {
+         try
+         {
+        
+          finProgramme =  Menu(file);
+            
+          }
+         catch (exception e)
+         {
+            cout << e.what() << endl;
+            Wait();
+         }
 
      }
-   }
-     
+   
+  
+}
+
    
     
    
