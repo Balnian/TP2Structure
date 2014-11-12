@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//clientenattente.h
+//fait par frederic paquette et francis lemaire
+//le 10 novembre 2014
+//but: classe contenant le noeuds  de la liste doublement chainer
+//contient le nom du client le nombre de personnes dans le groupe
+//les pointeurs sur le client precedent et suivant
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include"Section.h"
 #include <string>
 using namespace std;
@@ -9,8 +18,7 @@ class ClientEnAttente
 
 private:
    struct Client
-   {
-      
+   {     
       string nom;
       int nbPersonnes;
       Section sectionVoulu;

@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileAttendte.h
+//fait par frederic paquette et francis lemaire
+//le 10 novembre 2014
+//but: File doublement chainer qui gere des client en attente dans un restaurent
+// ajoute les client a la file carge un pointeur sur le premeir et le derniere client 
+// retire un client avec les conditions voulue ou un client qui quitte
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include "FileAttente.h"
 #include <sstream>
 #include <iostream>
@@ -55,6 +64,7 @@ int  FileAttente::GetNbClient() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void  FileAttente::AjouterClient(ClientEnAttente client)
 {
+   //cree le client avec les information demander a l'utilisateur
    ClientEnAttente* pclientTampo = new ClientEnAttente();
    *pclientTampo = client;
 
@@ -83,12 +93,14 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
    if (clientAretirer == nullptr)
       throw exception("Liste Vide.....!!!!...");
 
-   while (clientAretirer != nullptr && !(latable == clientAretirer))
+   //temp quil n'y a pas un match parfait on continue et si le pointeur n'est pas = a la fin de la file
+   while (clientAretirer != nullptr && !(latable == clientAretirer)) //
    {     
 		  clientAretirer = clientAretirer->GetSuivant();
    }
    if (latable.getMeilleurMatch() != nullptr)
    {
+      //attribue le nom et le nombre de personne au client retirer
       clientRetirer = *latable.getMeilleurMatch();
       RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
    }
@@ -114,7 +126,6 @@ void FileAttente::AfficherFile(ostream& sortie) const
    }
    
    sortie << GetNbClient() << endl;
-
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -122,7 +133,6 @@ string FileAttente::GetClient(int indice)
 {
    ClientEnAttente * client;
    string leClient;
-   string temp;
    stringstream ss;
    int i = 1;
 

@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FileAttendte.h
+//fait par frederic paquette et francis lemaire
+//le 10 novembre 2014
+//but: File doublement chainer qui gere des client en attente dans un restaurent
+// ajoute les client a la file carge un pointeur sur le premeir et le derniere client 
+// retire un client avec les conditions voulue ou un client qui quitte
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 #include "ClientEnAttente.h"
 #include "GestionTable.h"

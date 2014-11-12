@@ -1,13 +1,18 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//fonctionrecherchemenu.h
+//fait par frederic paquette et francis lemaire 
+//le 10 novembre 2014
+//but: Fonction Qui affiche le menu et qui gere le menu
+//et qui demande les information a l'utilisateur
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
 #include "FonctionRechercheMenu.h"
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 bool Menu(FileAttente& lafile)
 {
 	int choix;
-
-
+   //Menu des choix
    do
    {
 
@@ -27,31 +32,29 @@ bool Menu(FileAttente& lafile)
   return GestionMenu(choix,lafile);
 
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool GestionMenu(int choix,FileAttente& lafile)
 {
 	
    switch (choix)
    {
-   case 1: 
-  
+   case 1:   
       DemanderInfo(lafile);
-
       break;
-   case 2:
-    
+
+   case 2:  
 	   InfoTable(lafile);
       break;
+
    case 3:  
-    
       DemanderInfoClientQuitte(lafile);
       break;
-   case 4: 
-    
+
+   case 4:    
       AfficherClient(lafile);
       break;
-   case 5:
-     
+
+   case 5:    
       lafile.AfficherFile(cout);
       break;
   
@@ -64,9 +67,12 @@ bool GestionMenu(int choix,FileAttente& lafile)
    Wait();
    return false;
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DemanderInfo(FileAttente &lafile)
 {
+   //Demande toutes les info Pour un client
+   //et le passe a la file
+
    string nom;
    int nbPersonnes;
    Section section;
@@ -77,8 +83,6 @@ void DemanderInfo(FileAttente &lafile)
    cout << "Pour combien de personnes: ";
    cin >> nbPersonnes;
 
- 
-  
    system("cls");
    cout << "Dans quelles sections? (1=Oui, 0=Non)" << endl;
    cout << "Terrasse Fumeur: ";
@@ -95,10 +99,10 @@ void DemanderInfo(FileAttente &lafile)
    lafile.AjouterClient(clientTempo);
 
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void AfficherClient(FileAttente& lafile)
 {
-
+   //demande quelle numero de client que l'utilisateur veux
 	int indice;
 
 	cout << "Quelle clients voulez vous connaitre l'identiter? : ";
@@ -107,6 +111,7 @@ void AfficherClient(FileAttente& lafile)
 	
 
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DemanderInfoClientQuitte(FileAttente& lafile)
 {
 
@@ -118,7 +123,7 @@ void DemanderInfoClientQuitte(FileAttente& lafile)
 	cout << "Combien de personne ?: ";
 	cin >> nbPersonnes;
 
-
+   //affiche le message en fonction si le retirer a marcher ou non
    if (lafile.RetirerClient(nom, nbPersonnes))
    {
       cout << nom << " " << "a ete retirer avec succes de la file" << endl;
@@ -126,6 +131,7 @@ void DemanderInfoClientQuitte(FileAttente& lafile)
    else
       throw exception("Client introuvable impossible de retirer");
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void InfoTable(FileAttente &lafile)
 {
    int nbPersonne;
@@ -150,11 +156,13 @@ void InfoTable(FileAttente &lafile)
    GestionAttribution(lafile,nbPersonne, section);
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
 {
 
    Section laSection;
    ClientEnAttente leclient;
+
    switch (choix)
    {
    case 1:
@@ -170,9 +178,11 @@ void GestionAttribution(FileAttente & lafile,int nbpersonne, int choix)
 
   leclient = lafile.RetirerClient(nbpersonne,laSection);
 
+  //seulement si la table a ete attribuer corectement
   cout << "la table a ete attribuer a " << leclient.GetClient().nom << " pour "<<leclient.GetClient().nbPersonnes;
 
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Wait()
 {
 	cout << endl << "Any key to continue..." << endl;
