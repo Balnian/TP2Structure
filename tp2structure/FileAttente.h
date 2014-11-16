@@ -33,7 +33,7 @@ public:
    FileAttente();
    
    int GetNbClient() const;
-   string GetClient(int indice);
+   string GetClient(int indice) const;
    void AjouterClient(ClientEnAttente client);
    ClientEnAttente RetirerClient(int nbpersonnes,Section laSection);
    bool RetirerClient(string nom, int nbpersonnes);

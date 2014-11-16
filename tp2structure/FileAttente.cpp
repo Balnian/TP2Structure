@@ -90,7 +90,7 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
    ClientEnAttente clientRetirer;
 
    GestionTable latable(laSection, nbpersonne);
-   if (clientAretirer == nullptr)
+   if (FileVide())
       throw exception("Liste Vide.....!!!!...");
 
    //temp quil n'y a pas un match parfait on continue et si le pointeur n'est pas = a la fin de la file
@@ -114,22 +114,22 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
 void FileAttente::AfficherFile(ostream& sortie) const
 {
 
-   ClientEnAttente* lecture = GetPremier();
-   if (lecture == nullptr)
+   int i = 1;
 
+   if (FileVide())
 	   throw exception("liste vide...");
 
-   while (lecture != nullptr)
+   while (i <= GetNbClient())
    {
-      sortie << lecture->GetClient().nom << endl;
-      lecture = lecture->GetSuivant();
+	   sortie << GetClient(i) <<endl;
+	   i++;
    }
    
    sortie << GetNbClient() << endl;
 }
 ////////////////////////////////////////////////////////////////////
 
-string FileAttente::GetClient(int indice)
+string FileAttente::GetClient(int indice) const
 {
    ClientEnAttente * client;
    string leClient;
@@ -138,7 +138,7 @@ string FileAttente::GetClient(int indice)
 
    client = GetPremier();
 
-   if (client == nullptr)
+   if (FileVide())
 	   throw exception("liste vide...");
 
 
@@ -173,21 +173,18 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 
 	bool trouver = false;
 
-	if (clientAretirer == nullptr)
+	if (FileVide())
 		throw exception("Liste Vide.....!!!!...");
 
-
-	
 	while (clientAretirer!=nullptr && !trouver )
 	{
 		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom) 
                                                               && clientAretirer->GetClient().nbPersonnes == nbpersonnes)
-		{
-		
-			
+		{		
 			trouver = true;
-         if (clientAretirer->GetPrecedent() != nullptr)
+            if (clientAretirer->GetPrecedent() != nullptr)
             clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
+
          else if (clientAretirer->GetSuivant() != nullptr)
          {
             clientAretirer->GetSuivant()->Setprecedent(nullptr);
@@ -201,26 +198,20 @@ bool FileAttente::RetirerClient(string nom, int nbpersonnes)
         
          if (clientAretirer->GetSuivant()!=nullptr)        
 			clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
+
          else if (clientAretirer->GetPrecedent() != nullptr)
          {
             clientAretirer->GetPrecedent()->SetSuivant(nullptr);
             SetDernierClient(clientAretirer->GetPrecedent());
          }
-
 			delete clientAretirer;
-
-
-
-			SetNbClient(GetNbClient() - 1);		
-			
+			SetNbClient(GetNbClient() - 1);					
 		}
 		else
 		{
-			clientAretirer = clientAretirer->GetSuivant();
-			
+			clientAretirer = clientAretirer->GetSuivant();		
 		}
 	}
-
 
 	return trouver;
 }
