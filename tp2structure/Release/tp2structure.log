@@ -1,12 +1,17 @@
-﻿La génération a démarré 2014-11-12 11:30:49.
-     1>Projet "C:\Users\201037629\Desktop\TP2Structure\tp2structure\tp2structure.vcxproj" sur le nœud 2 (Build cible(s)).
+﻿La génération a démarré 2014-11-16 20:02:29.
+     1>Projet "C:\Users\Francis\Documents\Structures de données\tp2structure\tp2structure\tp2structure.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FileAttente.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ClientEnAttente.cpp FileAttente.cpp FonctionRechercheMenu.cpp GestionTable.cpp Section.cpp main.cpp
+         ClientEnAttente.cpp
          FileAttente.cpp
-     1>FileAttente.cpp(170): warning C4101: 'temp' : variable locale non référencée
-     1>FileAttente.cpp(228): warning C4018: '<' : incompatibilité signed/unsigned
+     1>FileAttente.cpp(172): warning C4101: 'temp' : variable locale non référencée
+     1>FileAttente.cpp(230): warning C4018: '<' : incompatibilité signed/unsigned
+         FonctionRechercheMenu.cpp
+         GestionTable.cpp
+         Section.cpp
+         main.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\201037629\Desktop\TP2Structure\Release\tp2structure.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\201037629\Desktop\TP2Structure\Release\tp2structure.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\201037629\Desktop\TP2Structure\Release\tp2structure.lib" /MACHINE:X86 /SAFESEH Release\ClientEnAttente.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Francis\Documents\Structures de données\tp2structure\Release\tp2structure.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Francis\Documents\Structures de données\tp2structure\Release\tp2structure.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Francis\Documents\Structures de données\tp2structure\Release\tp2structure.lib" /MACHINE:X86 /SAFESEH Release\ClientEnAttente.obj
          Release\FileAttente.obj
          Release\FonctionRechercheMenu.obj
          Release\GestionTable.obj
@@ -14,9 +19,9 @@
          Release\Section.obj
          Génération de code en cours
          Fin de la génération du code
-         tp2structure.vcxproj -> C:\Users\201037629\Desktop\TP2Structure\Release\tp2structure.exe
-     1>Génération du projet "C:\Users\201037629\Desktop\TP2Structure\tp2structure\tp2structure.vcxproj" terminée (Build cible(s)).
+         tp2structure.vcxproj -> C:\Users\Francis\Documents\Structures de données\tp2structure\Release\tp2structure.exe
+     1>Génération du projet "C:\Users\Francis\Documents\Structures de données\tp2structure\tp2structure\tp2structure.vcxproj" terminée (Build cible(s)).
 
 La génération a réussi.
 
-Temps écoulé 00:00:01.04
+Temps écoulé 00:00:02.40

@@ -14,13 +14,13 @@ struct Section
    bool teraceNf = false;
    bool interieur = false;
 
-   bool operator == (Section sect)
+   bool operator == (Section sect) const
    {
       //Vérifie si la section de la table est = a une des sections choisis
 	   bool estEgale=false;
-	   estEgale |= this->teraceF == sect.teraceF;
-	   estEgale |= this->teraceNf == sect.teraceNf;
-	   estEgale |= this->interieur == sect.interieur;
+	   estEgale |= this->teraceF == sect.teraceF && this->teraceF;
+	   estEgale |= this->teraceNf == sect.teraceNf && this->teraceNf;
+	   estEgale |= this->interieur == sect.interieur && this->interieur;
 	   return estEgale;
 
    }
