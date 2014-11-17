@@ -17,6 +17,8 @@ private:
    ClientEnAttente * pPremierClient_;
    ClientEnAttente* pDernnierClient_;
    int nbClient_;
+   int nbGroup_;
+   int nbGroupServie_;
 
    void SetDernierClient(ClientEnAttente* p);
    ClientEnAttente* GetDernier() const;
@@ -25,15 +27,19 @@ private:
    ClientEnAttente* GetPremier() const;
    string MettreEnMajuscules(string nom) const;
    void SupprimerClient(ClientEnAttente* clientAretirer);
-   
+ 
   
    void SetNbClient(int nb);
+   void SetNbGroupe(int nb);
+   void SetNbgroupeServie(int nb);
    bool FileVide() const;
 
 public:
    FileAttente();
    
-   int GetNbClient() const;
+     int GetNbClient() const;
+	 int GetNbGroupe() const;
+	 int GetNbGroupeServie() const;
    string GetClient(int indice) const;
    void AjouterClient(ClientEnAttente client);
    ClientEnAttente RetirerClient(int nbpersonnes,Section laSection);

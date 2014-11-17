@@ -19,4 +19,5 @@ void DemanderInfoClientQuitte(FileAttente& lafile);
 void AfficherClient(FileAttente& lafile);
 void InfoTable(FileAttente &lafile);
 void GestionAttribution(FileAttente & lafile,int nbpersonnes, int choix);
+bool DemandeFin(FileAttente & lafile);
 void Wait();

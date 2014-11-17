@@ -58,9 +58,8 @@ bool GestionMenu(int choix,FileAttente& lafile)
       lafile.AfficherFile(cout);
       break;
   
-   default:
-      cout << "Bonne Journee" << endl;
-      return true;
+   default: 
+	   return  DemandeFin(lafile);
       break;
    }
 
@@ -188,4 +187,28 @@ void Wait()
 	cout << endl << "Any key to continue..." << endl;
 	cin.ignore(cin.rdbuf()->in_avail() + 1);
 	system("cls");
+}
+
+bool DemandeFin(FileAttente & lafile)
+{
+	string fin;
+	if (lafile.GetNbGroupe() >= 1)
+	{
+		cout << "Ete vous sure de vouloir Quitter la file n'est pas vide o/n :";
+		cin >> fin;
+		if (fin == "o")
+		{
+			cout << endl;
+			cout << "Nombre groupe servie " << lafile.GetNbGroupeServie() << endl;
+			cout << "pour un total de " << lafile.GetNbClient() << " personnes" << endl;
+			cout << "il reste " << lafile.GetNbGroupe() << " groupe dans la file " << endl;
+			Wait();
+			return true;
+		}
+		else
+			return false;
+
+
+	}
+
 }

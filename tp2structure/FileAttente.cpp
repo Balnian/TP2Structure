@@ -17,49 +17,63 @@ FileAttente::FileAttente()
 	SetDernierClient(nullptr);
 	SetPremierClient(nullptr);
 	SetNbClient(0);
-
+	SetNbGroupe(0);
+	SetNbgroupeServie(0);
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+void FileAttente::SetNbGroupe(int nb)
+{
+	nbGroup_ = nb;
+}
+////////////////////////////////////////////////////////////////////////////////////////
+void FileAttente::SetNbgroupeServie(int nb)
+{
+	nbGroupServie_ = nb;
+}
+////////////////////////////////////////////////////////////////////////////////////////
+int FileAttente::GetNbGroupe() const
+{
+	return nbGroup_;
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+int FileAttente::GetNbGroupeServie() const
+{
+	return nbGroupServie_;
 }
 /////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetDernierClient(ClientEnAttente* p)
 {
-
 	pDernnierClient_ = p;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ClientEnAttente* FileAttente::GetDernier() const
 {
-
 	return pDernnierClient_;
-
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetPremierClient(ClientEnAttente* p)
 {
 	pPremierClient_ = p;;
 }
-/////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 ClientEnAttente* FileAttente::GetPremier() const
 {
 	return  pPremierClient_;
-
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetNbClient(int nb)
 {
 	nbClient_ = nb;
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 bool FileAttente::FileVide() const
 {
 	return GetPremier() == nullptr;
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 int  FileAttente::GetNbClient() const
 {
-
 	return nbClient_;
-
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void  FileAttente::AjouterClient(ClientEnAttente client)
@@ -80,8 +94,7 @@ void  FileAttente::AjouterClient(ClientEnAttente client)
 		SetDernierClient(pclientTampo);
 	}
 
-	SetNbClient(GetNbClient() + 1);
-
+	SetNbGroupe(GetNbGroupe() + 1);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 ClientEnAttente  FileAttente::RetirerClient(int nbpersonne, Section laSection)
@@ -103,10 +116,12 @@ ClientEnAttente  FileAttente::RetirerClient(int nbpersonne, Section laSection)
 		//attribue le nom et le nombre de personne au client retirer
 		clientRetirer = *latable.getMeilleurMatch();
 		RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
+
+		SetNbgroupeServie(GetNbGroupeServie() + 1);
+		SetNbClient(GetNbClient() + clientRetirer.GetClient().nbPersonnes);
 	}
 	else
 		throw exception("Personne ne veux/peux etre sur cette table....Bruler la!!!!!");
-
 
 	return clientRetirer;
 }
@@ -119,13 +134,13 @@ void FileAttente::AfficherFile(ostream& sortie) const
 	if (FileVide())
 		throw exception("liste vide...");
 
-	while (i <= GetNbClient())
+	while (i <= GetNbGroupe())
 	{
 		sortie << GetClient(i) << endl;
 		i++;
 	}
 
-	sortie << GetNbClient() << endl;
+	
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -141,6 +156,8 @@ string FileAttente::GetClient(int indice) const
 	if (FileVide())
 		throw exception("liste vide...");
 
+	if (GetNbGroupe() < indice)
+		throw exception("indice trop grand...");
 
 	while (i < indice)
 	{
@@ -160,9 +177,6 @@ string FileAttente::GetClient(int indice) const
 	leClient += ((client->GetClient().sectionVoulu.teraceNf) ? "terrasse non fumeur" : "");
 	leClient += ".";
 	return leClient;
-
-
-
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 bool FileAttente::RetirerClient(string nom, int nbpersonnes)
@@ -213,8 +227,9 @@ void FileAttente::SupprimerClient(ClientEnAttente* clientAretirer)
 		clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
 		clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
 	}
+	
+	SetNbGroupe(GetNbGroupe() - 1);
 	delete clientAretirer;
-	SetNbClient(GetNbClient() - 1);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 FileAttente::~FileAttente()
