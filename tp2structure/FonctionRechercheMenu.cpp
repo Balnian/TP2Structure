@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
-//fonctionrecherchemenu.h
+//fonctionrecherchemenu.cpp
 //fait par frederic paquette et francis lemaire 
 //le 10 novembre 2014
 //but: Fonction Qui affiche le menu et qui gere le menu

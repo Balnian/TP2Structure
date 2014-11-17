@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//clientenattente.h
+//clientenattente.cpp
 //fait par frederic paquette et francis lemaire
 //le 10 novembre 2014
 //but: classe contenant le noeuds  de la liste doublement chainer

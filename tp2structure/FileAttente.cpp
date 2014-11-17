@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//FileAttendte.h
+//FileAttendte.cpp
 //fait par frederic paquette et francis lemaire
 //le 10 novembre 2014
 //but: File doublement chainer qui gere des client en attente dans un restaurent
