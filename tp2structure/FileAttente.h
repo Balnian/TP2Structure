@@ -24,6 +24,7 @@ private:
    void SetPremierClient(ClientEnAttente* p);
    ClientEnAttente* GetPremier() const;
    string MettreEnMajuscules(string nom) const;
+   void SupprimerClient(ClientEnAttente* clientAretirer);
    
   
    void SetNbClient(int nb);

@@ -14,152 +14,152 @@ using namespace std;
 
 FileAttente::FileAttente()
 {
-   SetDernierClient(nullptr);
-   SetPremierClient(nullptr);
-   SetNbClient(0);
+	SetDernierClient(nullptr);
+	SetPremierClient(nullptr);
+	SetNbClient(0);
 
 }
 /////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetDernierClient(ClientEnAttente* p)
 {
-	
-   pDernnierClient_ = p;
+
+	pDernnierClient_ = p;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ClientEnAttente* FileAttente::GetDernier() const
 {
 
-   return pDernnierClient_;
+	return pDernnierClient_;
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetPremierClient(ClientEnAttente* p)
 {
-   pPremierClient_ = p;;
+	pPremierClient_ = p;;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 ClientEnAttente* FileAttente::GetPremier() const
 {
-   return  pPremierClient_;
+	return  pPremierClient_;
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::SetNbClient(int nb)
 {
-   nbClient_ = nb;
+	nbClient_ = nb;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 bool FileAttente::FileVide() const
 {
-   return GetPremier() == nullptr;
+	return GetPremier() == nullptr;
 }
-  
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 int  FileAttente::GetNbClient() const
 {
 
-   return nbClient_;
+	return nbClient_;
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 void  FileAttente::AjouterClient(ClientEnAttente client)
 {
-   //cree le client avec les information demander a l'utilisateur
-   ClientEnAttente* pclientTampo = new ClientEnAttente();
-   *pclientTampo = client;
+	//cree le client avec les information demander a l'utilisateur
+	ClientEnAttente* pclientTampo = new ClientEnAttente();
+	*pclientTampo = client;
 
-   if (FileVide())
-   {
-      SetPremierClient(pclientTampo);
-      SetDernierClient(pclientTampo);
-   }
-   else
-   {
-      pclientTampo->Setprecedent(GetDernier());
-      GetDernier()->SetSuivant(pclientTampo);
-      SetDernierClient(pclientTampo);
-   }
+	if (FileVide())
+	{
+		SetPremierClient(pclientTampo);
+		SetDernierClient(pclientTampo);
+	}
+	else
+	{
+		pclientTampo->Setprecedent(GetDernier());
+		GetDernier()->SetSuivant(pclientTampo);
+		SetDernierClient(pclientTampo);
+	}
 
-   SetNbClient(GetNbClient() + 1);
+	SetNbClient(GetNbClient() + 1);
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-ClientEnAttente  FileAttente::RetirerClient(int nbpersonne , Section laSection)
+ClientEnAttente  FileAttente::RetirerClient(int nbpersonne, Section laSection)
 {
-   ClientEnAttente* clientAretirer = GetPremier();
-   ClientEnAttente clientRetirer;
+	ClientEnAttente* clientAretirer = GetPremier();
+	ClientEnAttente clientRetirer;
 
-   GestionTable latable(laSection, nbpersonne);
-   if (FileVide())
-      throw exception("Liste Vide.....!!!!...");
+	GestionTable latable(laSection, nbpersonne);
+	if (FileVide())
+		throw exception("Liste Vide.....!!!!...");
 
-   //temp quil n'y a pas un match parfait on continue et si le pointeur n'est pas = a la fin de la file
-   while (clientAretirer != nullptr && !(latable == clientAretirer)) //
-   {     
-		  clientAretirer = clientAretirer->GetSuivant();
-   }
-   if (latable.getMeilleurMatch() != nullptr)
-   {
-      //attribue le nom et le nombre de personne au client retirer
-      clientRetirer = *latable.getMeilleurMatch();
-      RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
-   }
-   else
-	   throw exception("Personne ne veux/peux etre sur cette table....Bruler la!!!!!");
-   
+	//temp quil n'y a pas un match parfait on continue et si le pointeur n'est pas = a la fin de la file
+	while (clientAretirer != nullptr && !(latable == clientAretirer)) //
+	{
+		clientAretirer = clientAretirer->GetSuivant();
+	}
+	if (latable.getMeilleurMatch() != nullptr)
+	{
+		//attribue le nom et le nombre de personne au client retirer
+		clientRetirer = *latable.getMeilleurMatch();
+		RetirerClient(latable.getMeilleurMatch()->GetClient().nom, latable.getMeilleurMatch()->GetClient().nbPersonnes);
+	}
+	else
+		throw exception("Personne ne veux/peux etre sur cette table....Bruler la!!!!!");
 
-   return clientRetirer; 
+
+	return clientRetirer;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 void FileAttente::AfficherFile(ostream& sortie) const
 {
 
-   int i = 1;
+	int i = 1;
 
-   if (FileVide())
-	   throw exception("liste vide...");
+	if (FileVide())
+		throw exception("liste vide...");
 
-   while (i <= GetNbClient())
-   {
-	   sortie << GetClient(i) <<endl;
-	   i++;
-   }
-   
-   sortie << GetNbClient() << endl;
+	while (i <= GetNbClient())
+	{
+		sortie << GetClient(i) << endl;
+		i++;
+	}
+
+	sortie << GetNbClient() << endl;
 }
 ////////////////////////////////////////////////////////////////////
 
 string FileAttente::GetClient(int indice) const
 {
-   ClientEnAttente * client;
-   string leClient;
-   stringstream ss;
-   int i = 1;
+	ClientEnAttente * client;
+	string leClient;
+	stringstream ss;
+	int i = 1;
 
-   client = GetPremier();
+	client = GetPremier();
 
-   if (FileVide())
-	   throw exception("liste vide...");
+	if (FileVide())
+		throw exception("liste vide...");
 
 
-   while (i < indice)
-   {
-      client = client->GetSuivant();
-	    i++; 
-   }
+	while (i < indice)
+	{
+		client = client->GetSuivant();
+		i++;
+	}
 
-   leClient = client->GetClient().nom + " ";
+	leClient = client->GetClient().nom + " ";
 
-   ss << client->GetClient().nbPersonnes;
-   leClient += "pour " + ss.str() + ((client->GetClient().nbPersonnes > 1) ? " personnes" : " personne");
-   leClient += " dans la section "; 
-   leClient += ((client->GetClient().sectionVoulu.interieur) ? "salle a manger" : "");
-   leClient += ((client->GetClient().sectionVoulu.interieur && client->GetClient().sectionVoulu.teraceF) ? ", " : "");
-   leClient += ((client->GetClient().sectionVoulu.teraceF) ? "terrasse fumeur" : "");
-   leClient += ((client->GetClient().sectionVoulu.teraceF && client->GetClient().sectionVoulu.teraceNf) ? ", " : "");
-   leClient += ((client->GetClient().sectionVoulu.teraceNf) ? "terrasse non fumeur" : "");
-   leClient += ".";
-  return leClient;
+	ss << client->GetClient().nbPersonnes;
+	leClient += "pour " + ss.str() + ((client->GetClient().nbPersonnes > 1) ? " personnes" : " personne");
+	leClient += " dans la section ";
+	leClient += ((client->GetClient().sectionVoulu.interieur) ? "salle a manger" : "");
+	leClient += ((client->GetClient().sectionVoulu.interieur && client->GetClient().sectionVoulu.teraceF) ? ", " : "");
+	leClient += ((client->GetClient().sectionVoulu.teraceF) ? "terrasse fumeur" : "");
+	leClient += ((client->GetClient().sectionVoulu.teraceF && client->GetClient().sectionVoulu.teraceNf) ? ", " : "");
+	leClient += ((client->GetClient().sectionVoulu.teraceNf) ? "terrasse non fumeur" : "");
+	leClient += ".";
+	return leClient;
 
 
 
@@ -167,52 +167,23 @@ string FileAttente::GetClient(int indice) const
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 bool FileAttente::RetirerClient(string nom, int nbpersonnes)
 {
-
 	ClientEnAttente* clientAretirer = GetPremier();
-	ClientEnAttente* temp;
-
 	bool trouver = false;
 
 	if (FileVide())
 		throw exception("Liste Vide.....!!!!...");
 
-	while (clientAretirer!=nullptr && !trouver )
+	while (clientAretirer != nullptr && !trouver)
 	{
-		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom) 
-                                                              && clientAretirer->GetClient().nbPersonnes == nbpersonnes)
-		{		
+		if (MettreEnMajuscules(clientAretirer->GetClient().nom) == MettreEnMajuscules(nom)
+					&& clientAretirer->GetClient().nbPersonnes == nbpersonnes)
+		{
 			trouver = true;
-            if (clientAretirer->GetPrecedent() != nullptr)
-            clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
-
-         else if (clientAretirer->GetSuivant() != nullptr)
-         {
-            clientAretirer->GetSuivant()->Setprecedent(nullptr);
-            SetPremierClient(clientAretirer->GetSuivant());
-         }
-         else
-         {
-            SetPremierClient(nullptr);
-            SetDernierClient(nullptr);
-         }
-        
-         if (clientAretirer->GetSuivant()!=nullptr)        
-			clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
-
-         else if (clientAretirer->GetPrecedent() != nullptr)
-         {
-            clientAretirer->GetPrecedent()->SetSuivant(nullptr);
-            SetDernierClient(clientAretirer->GetPrecedent());
-         }
-			delete clientAretirer;
-			SetNbClient(GetNbClient() - 1);					
+			SupprimerClient(clientAretirer);
 		}
 		else
-		{
-			clientAretirer = clientAretirer->GetSuivant();		
-		}
+			clientAretirer = clientAretirer->GetSuivant();
 	}
-
 	return trouver;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -225,22 +196,43 @@ string FileAttente::MettreEnMajuscules(string nom) const
 	return nom;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+void FileAttente::SupprimerClient(ClientEnAttente* clientAretirer)
+{
+	if (clientAretirer == GetPremier())
+	{
+		SetPremierClient(clientAretirer->GetSuivant());
+		(GetPremier() != nullptr) ? clientAretirer->GetSuivant()->Setprecedent(nullptr) : SetDernierClient(nullptr);
+	}
+	else if (clientAretirer == GetDernier())
+	{
+		clientAretirer->GetPrecedent()->SetSuivant(nullptr);
+		SetDernierClient(clientAretirer->GetPrecedent());
+	}
+	else
+	{
+		clientAretirer->GetPrecedent()->SetSuivant(clientAretirer->GetSuivant());
+		clientAretirer->GetSuivant()->Setprecedent(clientAretirer->GetPrecedent());
+	}
+	delete clientAretirer;
+	SetNbClient(GetNbClient() - 1);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 FileAttente::~FileAttente()
 {
-   
-   if (GetPremier()!=nullptr)
-   {
-     ClientEnAttente* delitation = GetPremier();
-     ClientEnAttente* prochainAmourir;
 
-      while (delitation != nullptr)
-      {
-         prochainAmourir = delitation->GetSuivant();
-         delete delitation;
-         delitation = nullptr;
-         delitation = prochainAmourir;
-       }
+	if (GetPremier() != nullptr)
+	{
+		ClientEnAttente* delitation = GetPremier();
+		ClientEnAttente* prochainAmourir;
 
-   }
+		while (delitation != nullptr)
+		{
+			prochainAmourir = delitation->GetSuivant();
+			delete delitation;
+			delitation = nullptr;
+			delitation = prochainAmourir;
+		}
+
+	}
 
 }
